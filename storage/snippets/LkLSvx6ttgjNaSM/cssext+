@@ -1,0 +1,116 @@
+html {
+    height: 100%;
+    font-size: 1.3vw;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 62.5%;
+    }
+}
+
+body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e4a924;
+    transition: background-color 0.55s;
+    will-change: background-color;
+    margin: 0;
+}
+
+.menu__item {
+    width: 8.5rem;
+    height: 8.5rem;
+    border-radius: 12.5rem;
+    background: #f3f3f3;
+    display: inline-block;
+    margin-left: 1.1rem;
+    animation-name: close;
+    animation-duration: 0s;
+    will-change: width background-color;
+    transition: background 0.55s;
+    vertical-align: top;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1px rgba(0,0,0, 0.1);
+}
+
+.menu__item:first-child {
+    margin-left: 0;
+}
+
+.menu__item--animate {
+    animation-duration: 0.5s;
+}
+
+.menu__item--active {
+    width: 17rem;
+    animation-name: open;
+}
+
+@keyframes open {
+    0% {
+        width: 8.5rem;
+    }
+
+    40% {
+        width: 18.5rem;
+    }
+
+    80% {
+        width: 17rem;
+    }
+
+    100% {
+        width: 17rem;
+    }
+}
+
+@keyframes close {
+    0% {
+        width: 17rem;
+    }
+
+    40% {
+        width: 7rem;
+    }
+
+    80% {
+        width: 8.5rem;
+    }
+
+    100% {
+        width: 8.5rem;
+    }
+}
+
+.menu__item--active.menu__item--yellow {
+    background: #fabe2b;
+}
+
+.menu__item--active.menu__item--red {
+    background: #f43768;
+}
+
+.menu__item--active.menu__item--green {
+    background: #45e1a3;
+}
+
+.menu__item--active.menu__item--purple {
+    background: #c152da;
+}
+
+.menu__item svg {
+    fill: #a6a6a6;
+    width: 4.5rem;
+    height: 4.5rem;
+    transtiion: fill 0.55s;
+    will-change: fill;
+}
+
+.menu__item--active svg {
+    fill: #fffdfe;
+}

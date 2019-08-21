@@ -1,0 +1,110 @@
+<div class="animations-container">
+  <div class="example-container">
+    <code>.bounceInRight</code>
+    <div class="animation-example" data-anim="bounceInRight"></div>
+  </div>
+  <div class="example-container">
+    <code>.bounceInLeft</code>
+    <div class="animation-example" data-anim="bounceInLeft"></div>
+  </div>
+  <div class="example-container">
+    <code>.bounceInDown</code>
+    <div class="animation-example" data-anim="bounceInDown"></div>
+  </div>
+  <div class="example-container">
+    <code>.bounceInDrop</code>
+    <div class="animation-example" data-anim="bounceInDrop"></div>
+  </div>
+  <div class="example-container">
+    <code>.glideInRight</code>
+    <div class="animation-example" data-anim="glideInRight"></div>
+  </div>
+  <div class="example-container">
+    <code>.glideInLeft</code>
+    <div class="animation-example" data-anim="glideInLeft"></div>
+  </div>
+  <div class="example-container">
+    <code>.glideInUp</code>
+    <div class="animation-example" data-anim="glideInUp"></div>
+  </div>
+  <div class="example-container">
+    <code>.glideInDown</code>
+    <div class="animation-example" data-anim="glideInDown"></div>
+  </div>
+  <div class="example-container">
+    <code>.bounceInScale</code>
+    <div class="animation-example" data-anim="bounceInScale"></div>
+  </div>
+  <div class="example-container">
+    <code>.bounceInScale2</code>
+    <div class="animation-example" data-anim="bounceInScale2"></div>
+  </div>
+  <div class="example-container">
+    <code>.springScaleOut</code>
+    <div class="animation-example" data-anim="springScaleOut"></div>
+  </div>
+  <div class="example-container">
+    <code>.hoverJiggle</code>
+    <div class="animation-example" data-anim="hoverJiggle"></div>
+  </div>
+  <div class="example-container">
+    <code>.hoverJiggle2</code>
+    <div class="animation-example" data-anim="hoverJiggle2"></div>
+  </div>
+  <div class="example-container">
+    <code>.twirlIn</code>
+    <div class="animation-example" data-anim="twirlIn"></div>
+  </div>
+  <div class="example-container">
+    <code>.rubberband</code>
+    <div class="animation-example" data-anim="rubberband"></div>
+  </div>
+  <div class="example-container">
+    <code>.jellyfall</code>
+    <div class="animation-example" data-anim="jellyfall"></div>
+  </div>
+  <div class="example-container">
+    <code>.jellyfall2</code>
+    <div class="animation-example" data-anim="jellyfall2"></div>
+  </div>
+  <div class="example-container">
+    <code>.slideInRight</code>
+    <div class="animation-example" data-anim="slideInRight"></div>
+  </div>
+  <div class="example-container">
+    <code>.slideInLeft</code>
+    <div class="animation-example" data-anim="slideInLeft"></div>
+  </div>
+  <div class="example-container">
+    <code>.flipInLeft</code>
+    <div class="animation-example" data-anim="flipInLeft"></div>
+  </div>
+  <div class="example-container">
+    <code>.flipInRight</code>
+    <div class="animation-example" data-anim="flipInRight"></div>
+  </div>
+  <div class="example-container">
+    <code>.flipInBottom</code>
+    <div class="animation-example" data-anim="flipInBottom"></div>
+  </div>
+  <div class="example-container">
+    <code>.flipInTop</code>
+    <div class="animation-example" data-anim="flipInTop"></div>
+  </div>
+  <div class="example-container">
+    <code>.kitchenSink</code>
+    <div class="animation-example" data-anim="kitchenSink"></div>
+  </div>
+  <div class="example-container">
+    <code>.flyInBottom</code>
+    <div class="animation-example" data-anim="flyInBottom"></div>
+  </div>
+  <div class="example-container">
+    <code>.flyInLeft</code>
+    <div class="animation-example" data-anim="flyInLeft"></div>
+  </div>
+  <div class="example-container">
+    <code>.flyInRight</code>
+    <div class="animation-example" data-anim="flyInRight"></div>
+  </div>
+</div>

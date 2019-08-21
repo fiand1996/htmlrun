@@ -1,0 +1,19 @@
+<div class="card-form">
+  <form class="signup">
+    <div class="form-title">Sign Up for our Newsletter!</div>
+    <div class="form-body">
+      <div class="row">
+        <input type="text" placeholder="First Name*">
+        <input type="text" placeholder="Last Name*">
+      </div>
+      <div class="row">
+        <input type="text" placeholder="Email Address*">
+      </div>
+    </div>
+    <div class="rule"></div>
+    <div class="form-footer">
+      <a>Sign Me Up!<span class="fa fa-thumbs-o-up"></span></a>
+      <a>Not Now!<span class="fa fa-ban"></span></a>
+    </div>
+  </form>
+</div>

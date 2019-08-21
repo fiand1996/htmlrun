@@ -1,0 +1,107 @@
+'use strict';
+
+const svg = document.querySelector('.peas');
+let mouseX = 0;
+let mouseY = 0;
+let pupilPadding = 1.5;
+
+// ------------
+// Mouse events
+// ------------
+
+window.addEventListener('mousemove', mouseMove);
+
+function mouseMove(e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+}
+
+// ---
+// Pea
+// ---
+
+class Pea {
+  constructor(className) {
+    this.pea = svg.querySelector(className);
+    this.eyeLeft = {
+      element: this.pea.querySelector('.eye-left'),
+      get radius() { return parseInt(this.element.getAttribute('rx')) },
+      get xMin() { return parseInt(this.element.getAttribute('cx')) - this.radius + pupilPadding },
+      get xMax() { return parseInt(this.element.getAttribute('cx')) + this.radius - pupilPadding },
+      get yMin() { return parseInt(this.element.getAttribute('cy')) - this.radius + pupilPadding },
+      get yMax() { return parseInt(this.element.getAttribute('cy')) + this.radius - pupilPadding },
+      get center() { return getItemCenter(this.element.getAttribute('cx'), this.element.getAttribute('cy')) }
+    };
+    this.eyeRight = {
+      element: this.pea.querySelector('.eye-right'),
+      get radius() { return parseInt(this.element.getAttribute('rx')) },
+      get xMin() { return parseInt(this.element.getAttribute('cx')) - this.radius + pupilPadding },
+      get xMax() { return parseInt(this.element.getAttribute('cx')) + this.radius - pupilPadding },
+      get yMin() { return parseInt(this.element.getAttribute('cy')) - this.radius + pupilPadding },
+      get yMax() { return parseInt(this.element.getAttribute('cy')) + this.radius - pupilPadding },
+      get center() { return getItemCenter(this.element.getAttribute('cx'), this.element.getAttribute('cy')) }
+    };
+    this.pupilLeft = {
+      element: this.pea.querySelector('.pupil-left'),
+      get radius() { return parseInt(this.element.getAttribute('rx')) },
+      get center() { return getItemCenter(this.element.getAttribute('cx'), this.element.getAttribute('cy')) }
+    }
+    this.pupilRight = {
+      element: this.pea.querySelector('.pupil-right'),
+      get radius() { return parseInt(this.element.getAttribute('rx')) },
+      get center() { return getItemCenter(this.element.getAttribute('cx'), this.element.getAttribute('cy')) }
+    }
+
+    this.pupilLeft.element.setAttribute('cx', this.eyeLeft.xMin + (this.pupilLeft.radius * 2));
+    this.pupilLeft.element.setAttribute('cy', this.eyeLeft.yMin + (this.pupilLeft.radius * 2));
+
+    this.pupilRight.element.setAttribute('cx', this.eyeRight.xMin + (this.pupilRight.radius * 2));
+    this.pupilRight.element.setAttribute('cy', this.eyeRight.yMin + (this.pupilRight.radius * 2));
+
+    this.pea.addEventListener('mouseenter', function() {
+      this.classList.add('pea-hovered');
+    });
+    
+    this.pea.addEventListener('mouseleave', function() {
+      this.classList.remove('pea-hovered');
+    });
+  }
+
+  update() {
+    let amountY = (this.eyeLeft.yMax - this.eyeLeft.yMin - (this.pupilLeft.radius * 3)) * (mouseY/document.body.clientHeight);
+    let amountX = (this.eyeLeft.xMax - this.eyeLeft.xMin - (this.pupilLeft.radius * 3)) * (mouseX/document.body.clientWidth);
+    this.pupilLeft.element.style.transform = `translate(${amountX}px, ${amountY}px)`;
+    this.pupilRight.element.style.transform = `translate(${amountX}px, ${amountY}px)`;
+  }
+}
+
+const peas = [
+  new Pea('.pea-1'),
+  new Pea('.pea-2'),
+  new Pea('.pea-3')
+];
+
+// --------------
+// Animation loop
+// --------------
+
+function loop() {
+  for (let pea of peas) {
+    pea.update();
+  }
+
+  requestAnimationFrame(loop);
+}
+
+loop();
+
+// ----------------
+// Helper functions
+// ----------------
+
+function getItemCenter(x, y) {
+  return {
+    x: document.body.clientWidth/2 - svg.clientWidth/2 + (x * window.devicePixelRatio),
+    y: document.body.clientHeight/2 - svg.clientHeight/2 + (y * window.devicePixelRatio)
+  };
+}

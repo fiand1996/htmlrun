@@ -1,0 +1,15 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="mobile-menu">
+
+  <ul>
+    <a href="projects.html">
+      <li class="projects">projects</li>
+    </a>
+    <a href="about.html">
+      <li>about</li>
+    </a>
+    <a href="contact.html">
+      <li>contact</li>
+    </a>
+  </ul>
+</div>

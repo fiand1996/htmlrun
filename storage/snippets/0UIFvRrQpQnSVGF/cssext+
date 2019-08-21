@@ -1,0 +1,96 @@
+:root {
+  --bg: #13142b;
+  --clouds: #2b344d;
+  --open: #14132b;
+  --fleck: #87aad5;
+  --mouth: #14132b;
+  --cloud: #87aad5;
+  --dur: 1s;
+}
+.day {
+  --bg: #A9C8E1;
+  --clouds: #C8E1F1;
+  --open:#2b344d;
+  --fleck: #E0F0F7;
+  --mouth: #2b344d;
+  --cloud: #E0F0F7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+}
+body {
+  background: var(--bg);
+  transition: background var(--dur);
+}
+svg {
+  visibility: hidden;
+  position: absolute;
+}
+.pos-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+#happy-cloud {
+  margin-left: 2vmin;
+  overflow: visible;
+}
+
+#cloud {
+  fill: var(--cloud);
+  transition: fill var(--dur);
+}
+#happy-cloud *:hover {cursor: pointer}
+#mouth {
+  fill: var(--mouth);
+  transition: fill var(--dur);
+}
+.clouds {
+  fill: var(--clouds);
+  transition: fill var(--dur);
+}
+.open {
+  fill: var(--open);
+  transition: fill var(--dur);
+}
+.fleck {
+  fill: var(--fleck);
+  transition: fill var(--dur);
+}
+.cheeks {
+  opacity: 0;
+  fill: var(--bg);
+  transition: var(--dur);
+}
+
+.heart {
+  position: absolute;
+}
+.heart:before,
+.heart:after {
+  position: absolute;
+  content: "";
+  left: 5vmin;
+  top: 0;
+  width: 5vmin;
+  height: 8vmin;
+  background: currentColor;
+  border-radius: 5vmin 5vmin 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}

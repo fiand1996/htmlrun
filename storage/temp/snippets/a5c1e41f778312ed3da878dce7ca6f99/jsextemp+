@@ -1,0 +1,22 @@
+// MOBILE MENU
+$(function() {
+  // create identical menu buttons with different classes	
+  var $active = $("<div class='mm-active'><hr><hr><hr></div>");
+
+  // append 'inactive' menu button to menu div
+  $(".mobile-menu").prepend($active);
+
+  $($active).click(function() {
+
+    if ($active.hasClass('mm-active')) {
+      $(this).nextAll("ul").animate({
+        'margin-left': '-=' + 90
+      }, 100);
+    } else {
+      $(this).nextAll("ul").animate({
+        'margin-left': '+=' + 90
+      }, 100);
+    }
+    $active.toggleClass('mm-active');
+  });
+});

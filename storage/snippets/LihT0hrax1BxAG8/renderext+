@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <title></title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <meta name="robots" content="noindex, nofollow">
+          <meta name="googlebot" content="noindex, nofollow">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/cerulean/bootstrap.min.css" rel="stylesheet" type="text/css" />
+          <style type="text/css">
+          body {
+    background: #20262E;
+    padding: 20px;
+    font-family: Helvetica;
+}
+
+#banner-message {
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    font-size: 25px;
+    text-align: center;
+    transition: all 0.2s;
+    margin: 0 auto;
+    width: 300px;
+}
+
+#banner-message button {
+    background: #0077e6;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 15px;
+    color: #fff;
+}
+
+#banner-message:hover {
+    background: #0077e6;
+    color: #fff;
+    margin-top: 40px;
+    width: 200px;
+}
+
+#banner-message:hover button {
+    background: #fff;
+    color: #000;
+}
+          </style>
+     </head>
+     <body>
+          <div id="banner-message">
+  <p>Hello World</p>
+  <button>Hover to change color</button>
+</div>
+          <script type="text/javascript">
+          
+          </script>
+     </body>
+</html>

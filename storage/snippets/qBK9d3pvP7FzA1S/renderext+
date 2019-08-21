@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <title></title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <meta name="robots" content="noindex, nofollow">
+          <meta name="googlebot" content="noindex, nofollow">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+          <style type="text/css">
+          html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+  background-color: #19141b;
+}
+          </style>
+     </head>
+     <body>
+          <div id="app"></div>
+          <script type="text/javascript">
+          function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+function getRandomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function lerp(start, end, amount) {
+  return (1 - amount) * start + amount * end;
+}
+
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  get position() {
+    return [this.x, this.y];
+  }
+
+  delta(point) {
+    return [point.x - this.x, point.y - this.y];
+  }
+
+  distance(point) {
+    const [dx, dy] = this.delta(point);
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  moveTo(x, y) {
+    this.x = x;
+    this.y = y;
+    return this;
+  }
+
+  move(x, y) {
+    this.x += x;
+    this.y += y;
+    return this;
+  }
+
+  lerp(destination, amount) {
+    this.x = lerp(this.x, destination.x, amount);
+    this.y = lerp(this.y, destination.y, amount);
+    return this;
+  }}
+
+
+
+class Spring extends Point {
+  constructor({
+    x,
+    y,
+    isFixed,
+    mass = 10,
+    elasticity = 0.4,
+    damping = 0.05 })
+  {
+    super(x, y);_defineProperty(this, "update",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    () => {
+      if (this.isFixed) return;
+      this.setSpringForce();
+      this.setAdjacentForces();
+      this.solveVelocity();
+    });this.ox = x; // original origin x, never changes
+    this.oy = y; // original origin y, never changes
+    this.vx = 0; // velocity x
+    this.vy = 0; // velocity y
+    this.fx = 0; // force x
+    this.fy = 0; // force y
+    this.isFixed = isFixed; // indicates whether this point can be moved
+    this.attractors = []; // spring constants
+    this.mass = mass;this.elasticity = elasticity;this.damping = damping;}applyForce(x, y) {this.fx += x;this.fy += y;}addAttractor(point) {this.attractors.push(point);}setAdjacentForces() {this.attractors.forEach(point => {const force = { x: 0, y: 0 };const { x: x1, y: y1 } = point;const { x: x2, y: y2 } = this;force.x = x1 - x2;force.y = y1 - y2; // apply adjacent forces to current spring
+      this.applyForce(force.x, force.y);});}setSpringForce() {// force to origin, difference multiplied by elasticity constant
+    const fx = (this.ox - this.x) * this.elasticity;const fy = (this.oy - this.y) * this.elasticity; // sum forces
+    this.fx += fx;this.fy += fy;}solveVelocity() {if (this.fx === 0 && this.fy === 0) return; // acceleration = force / mass;
+    const ax = this.fx / this.mass;const ay = this.fy / this.mass; // velocity, apply damping then ad acceleration
+    this.vx = this.damping * this.vx + ax;this.vy = this.damping * this.vy + ay; // add velocity to center and top/left
+    this.x += this.vx;this.y += this.vy; // reset any applied forces
+    this.fx = 0;this.fy = 0;}}class ControlPoint extends Point {constructor(x, y, opts) {super(x, y);this.originX = x;this.originY = y;this.start = getRandomFloat(1, 10000);this.speedX = getRandomFloat(0, 2);this.speedY = getRandomFloat(0, 1);this.maxMoveYAxis = opts.maxMoveYAxis;this.maxMoveXAxis = opts.maxMoveXAxis;}updatePosition(tick) {
+    const sin = (tick + this.start) * 0.01;
+    const offY = Math.sin(sin * this.speedY) * this.maxMoveYAxis;
+    const offX = Math.sin(sin * this.speedX) * this.maxMoveXAxis;
+    const x = this.originX + offX;
+    const y = this.originY + offY;
+    this.moveTo(x, y);
+  }}
+
+
+
+class Line {
+  constructor(opts) {
+    Object.keys(opts).map(key => {
+      this[key] = opts[key];
+    });
+    this.points = [];
+    this.createPoints();
+  }
+
+  createPoints() {
+    const p1 = this.p1;
+    const p2 = this.p2;
+
+    const [dx, dy] = p1.delta(p2);
+    const distance = p1.distance(p2);
+    const amount = distance / this.resolution;
+    const pointAmt = Math.round(amount);
+
+    const offX = dx / pointAmt;
+    const offY = dy / pointAmt;
+
+    for (let k = 0; k <= pointAmt; k++) {
+      const x = p1.x + offX * k;
+      const y = p1.y + offY * k;
+
+      const point = new ControlPoint(x, y, {
+        maxMoveYAxis: this.maxMoveYAxis,
+        maxMoveXAxis: this.maxMoveXAxis });
+
+
+      this.points.push(point);
+    }
+  }
+
+  draw(ctx, destinationLine, lerpVal, tick, i) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(105, ${255 * lerpVal + 70}, 200, 1)`;
+
+    for (let k = 0; k < this.points.length - 1; k++) {
+      const a1 = this.points[k];
+      const a2 = this.points[k + 1];
+      const b1 = destinationLine.points[k];
+      const b2 = destinationLine.points[k + 1];
+
+      const l1 = {
+        x: lerp(a1.x, b1.x, lerpVal),
+        y: lerp(a1.y, b1.y, lerpVal) };
+
+      const l2 = {
+        x: lerp(a2.x, b2.x, lerpVal),
+        y: lerp(a2.y, b2.y, lerpVal) };
+
+
+      const cpx = (l1.x + l2.x) * 0.5;
+      const cpy = (l1.y + l2.y) * 0.5;
+
+      // debug control points
+      // ctx.fillStyle = 'red';
+      // ctx.fillRect(l1.x - 3, l1.y - 3, 6, 6);
+      // ctx.fillStyle = 'blue';
+      // ctx.fillRect(l2.x - 3, l2.y - 3, 6, 6);
+      // ctx.fillStyle = 'black';
+      // ctx.fillRect(cpx - 3, cpy - 3, 6, 6);
+
+      if (k === 0) {
+        ctx.moveTo(l1.x, l1.y);
+      } else if (k === this.points.length - 2) {
+        ctx.quadraticCurveTo(l1.x, l1.y, l2.x, l2.y);
+      } else {
+        ctx.quadraticCurveTo(l1.x, l1.y, cpx, cpy);
+      }
+    }
+
+    ctx.stroke();
+    ctx.restore();
+  }}
+
+
+class OrbCanvas {
+  constructor({ diameter }) {_defineProperty(this, "draw",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ({ ctx, tick, dpr, bounds }) => {
+      // clearCanvas({ ctx });
+      ctx.globalAlpha = 0.1;
+      ctx.fillStyle = '#19141b';
+      ctx.fillRect(0, 0, bounds.w, bounds.h);
+      ctx.globalAlpha = 1;
+      // ctx.strokeStyle = this.color;
+      ctx.lineWidth = this.lineWidth * dpr;
+
+      for (let l = 0; l <= this.numberOfLines; l++) {
+        const lerpVal = l / this.numberOfLines;
+        this.l1.draw(ctx, this.l2, lerpVal, tick, l);
+      }
+
+      for (let i = 0; i < this.l1.points.length; i++) {
+        const p1 = this.l1.points[i];
+        const p2 = this.l2.points[i];
+        p1.updatePosition(tick);
+        p2.updatePosition(tick);
+      }
+    });this.diameter = diameter;this.resolution = diameter / 4; // control points per line
+    this.maxMoveYAxis = diameter / 3; // maximum distance a point on a line will move up/down from it's origin
+    this.maxMoveXAxis = diameter / 10; // maximum distance a point on a line will move up/down from it's origin
+    this.numberOfLines = diameter / 8;this.lineWidth = 2;this.color = '#ff5a00'; // function of diameter
+    // this.numberOfLines = (diameter + this.maxMoveYAxis * 2) / 15; // number of lines the orb will contain
+    // this.lineWidth = diameter / (this.numberOfLines * 5);
+    const lineConfig = { resolution: this.resolution, maxMoveYAxis: this.maxMoveYAxis, maxMoveXAxis: this.maxMoveXAxis };this.l1 = new Line({ p1: new Point(-this.maxMoveXAxis, -this.maxMoveYAxis), p2: new Point(this.diameter + this.maxMoveXAxis, -this.maxMoveYAxis), ...lineConfig });this.l2 = new Line({ p1: new Point(-this.maxMoveXAxis, this.diameter + this.maxMoveYAxis), p2: new Point(this.diameter + this.maxMoveXAxis, this.diameter + this.maxMoveYAxis), ...lineConfig });}}class Canvas {constructor({ canvas, container, entities = [], pauseInBackground, dpr }) {_defineProperty(this, "handleResize",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    event => {
+      this.setCanvasSize();
+      this.setContainerRect();
+      this.resizeEntities(event);
+    });_defineProperty(this, "addEntity",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    newEntity => {
+      this.entities = [...this.entities, newEntity];
+      // call setup since this is new
+      newEntity.setup && newEntity.setup(this);
+      return this.entities.length - 1;
+    });_defineProperty(this, "stop",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    () => {
+      this.cancelRaf();
+      this.paused = true;
+    });_defineProperty(this, "start",
+
+    () => {
+      this.cancelRaf();
+      this.paused = false;
+      this.render();
+    });_defineProperty(this, "clearCanvas",
+
+    ({ ctx }) => {
+      const { x, y, w, h } = this.bounds;
+      ctx.clearRect(x, y, w, h);
+    });_defineProperty(this, "render",
+
+
+    () => {
+      // Draw and Update items here.
+      this.entities.forEach(({ draw, update }) => {
+        draw && draw(this);
+        update && update(this);
+      });
+
+      ++this.tick;
+
+      if (!this.paused) {
+        this.rafId = window.requestAnimationFrame(this.render);
+      }
+    });this.canvas = canvas;this.container = container;this.pauseInBackground = pauseInBackground;this.dpr = dpr || window.devicePixelRatio || 1;this.ctx = canvas.getContext('2d');this.ctx.scale(this.dpr, this.dpr); // tick counter
+    this.tick = 0; // request animation frame id
+    this.rafId = null; // entities to be drawn on the canvas
+    this.entities = entities; // setup and run
+    this.setCanvasSize();this.setContainerRect();this.setupListeners();this.setupEntities();this.render();}setupListeners() {window.addEventListener('resize', this.handleResize);if (this.pauseInBackground) {window.addEventListener('blur', this.stop);window.addEventListener('focus', this.start);}}destroy() {window.removeEventListener('blur', this.stop);window.removeEventListener('focus', this.start);window.removeEventListener('resize', this.handleResize);this.cancelRaf();this.entities.forEach(({ destroy }) => {destroy && destroy(this);});}setContainerRect() {if (!this.container) return;this.containerRect = this.container.getBoundingClientRect();}setCanvasSize() {let { innerWidth: w, innerHeight: h } = window; // sized to the container if available
+    if (this.container) {w = this.container.clientWidth;h = this.container.clientHeight;} // otherwise, fullscreen
+    const w2 = w * this.dpr;const h2 = h * this.dpr;this.canvas.width = w2;this.canvas.height = h2;this.canvas.style.width = w + 'px';this.canvas.style.height = h + 'px';this.canvas.style.position = 'absolute';this.canvas.style.top = 0;this.canvas.style.left = 0;this.bounds = { x: 0, y: 0, w: w2, h: h2, hw: w, hh: h };}setupEntities() {this.entities.forEach(({ setup }) => {setup && setup(this);});}resizeEntities(event) {this.entities.forEach(({ resize }) => {resize && resize(this, event);});}removeEntity(deleteIndex) {this.entities = this.entities.filter((el, i) => i !== deleteIndex);return this.entities;}removeDead() {this.entities = this.entities.filter(({ dead = false }) => !dead);}cancelRaf() {this.rafId && cancelAnimationFrame(this.rafId);this.rafId = null;}}const { Component, Fragment } = React;const MOUSE_STRENGTH = 20;
+
+class Orb extends Component {
+
+  constructor(props) {
+    super(props);_defineProperty(this, "_demo",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    () => {
+      this._demoTick = 0;
+      this._demoInterval = setInterval(() => window.requestAnimationFrame(this._demoForce), 1);
+    });_defineProperty(this, "_demoForce",
+
+    () => {
+      this._demoTick += 1;
+      if (this._demoTick > 200) {
+        clearInterval(this._demoInterval);
+      }
+
+      const fx = 200 - this._demoTick;
+      this._orbPosition.applyForce(fx, 0);
+    });_defineProperty(this, "_handleMouseEnter",
+
+    () => {
+      // reset pointers
+      this.pointerPrevious = null;
+      this.pointer = null;
+    });_defineProperty(this, "_handleMouse",
+
+    event => {
+      if (!this.props.shouldSpring) return;
+
+      this.pointerPrevious = this.pointer;
+      this.pointer = new Point(
+      event.clientX - this.props.x - this.props.radius,
+      event.clientY - this.props.y - this.props.radius);
+
+
+      // mouse just entered, no good delta will come from this.
+      if (this.pointerPrevious === null) return;
+
+      const [dx, dy] = this.pointerPrevious.delta(this.pointer);
+      const fx = dx * MOUSE_STRENGTH;
+      const fy = dy * MOUSE_STRENGTH;
+      this._orbPosition.applyForce(fx, fy);
+
+    });_defineProperty(this, "_stopAnimationLoop",
+
+    () => {
+      this._rafId = window.cancelAnimationFrame(this._rafId);
+    });_defineProperty(this, "_animationLoop",
+
+    () => {
+      const { x: ox, y: oy } = this._orbPosition;
+
+      this._container.style.transform = `translate(${ox}px, ${oy}px)`;
+      this._orbPosition.update();
+      this._rafId = window.requestAnimationFrame(this._animationLoop);
+    });this.pointer = null;this._orbPosition = new Spring({ x: 0, y: 0, mass: 100, elasticity: 0.8, damping: 0.85, ...props.options });window.addEventListener('mousemove', this._handleMouse);this._rafId = null;}componentWillUnmount() {cancelAnimationFrame(this._rafId);}componentDidMount() {const DPR = 1 || window.devicePixelRatio;this._canvasInstance = new Canvas({ canvas: this._canvas, container: this._container, dpr: DPR, pauseInBackground: true, entities: [new OrbCanvas({ diameter: this.props.radius * 2 * DPR })] });if (!this.props.shouldAnimate) {this._canvasInstance.stop();}if (this.props.shouldSpring) {this._animationLoop();}this._demo();}componentDidUpdate(prevProps) {if (!prevProps.shouldSpring && this.props.shouldSpring) {this._animationLoop();}if (prevProps.shouldSpring && !this.props.shouldSpring) {this._stopAnimationLoop();}if (!prevProps.shouldAnimate && this.props.shouldAnimate) {this._canvasInstance.start();}if (prevProps.shouldAnimate && !this.props.shouldAnimate) {this._canvasInstance.stop();}}componentWillUnmount() {this._canvasInstance.destroy();}
+
+  render() {
+    const { radius, x, y } = this.props;
+
+    return (
+      React.createElement("div", { style: { position: 'relative' } },
+      React.createElement("div", {
+        className: "orb",
+        ref: ref => this._container = ref,
+        style: {
+          position: 'absolute',
+          top: y - radius,
+          left: x - radius,
+          width: radius * 2,
+          height: radius * 2,
+          borderRadius: radius,
+          overflow: 'hidden',
+          willChange: 'transform' } },
+
+
+      React.createElement("canvas", { ref: ref => this._canvas = ref }))));
+
+
+
+  }}
+
+
+const el = document.getElementById('app');
+const orbz = Array(4).fill(null);
+
+ReactDOM.render(
+React.createElement(Fragment, null,
+orbz.map((_, i) =>
+React.createElement(Orb, {
+  radius: (orbz.length - i) * Math.min(window.innerWidth, window.innerHeight) * 0.1,
+  x: window.innerWidth / 2,
+  y: window.innerHeight / 2,
+  shouldSpring: true,
+  shouldAnimate: true,
+  options: {
+    mass: 100 + 50 * (orbz.length - i),
+    elasticity: 0.95,
+    damping: 0.95 } }))),
+
+
+
+
+el);
+          </script>
+     </body>
+</html>

@@ -1,0 +1,62 @@
+function initApp() {
+  updatePokedex();
+  initEvents();
+}
+var global_infos = {}
+function updateScreen() {
+  var infos = global_infos
+  window.screengbc.className = "screen on";
+  window.pokimage.src = infos.sprites[infos.sprite_index]
+  window.pokname.innerHTML = infos.name;
+}
+function initEvents() {
+  window.abutton.addEventListener("click", function( event ) {
+    updatePokemon();
+  }, false);
+  window.bbutton.addEventListener("click", function( event ) {
+    resetScreen()
+    updatePokedex()
+  }, false);
+}
+function updatePokemon() {
+  global_infos.sprite_index += 1;
+  if(global_infos.sprite_index >= global_infos.sprite_max) {
+    global_infos.sprite_index = 0
+  }
+  updateScreen();
+}
+function resetScreen() {
+  window.pokimage.src = ""
+  window.pokname.innerHTML = "";
+}
+function updatePokedex() {
+  let rand = Math.floor(Math.random() * Math.floor(700));
+  window.screengbc.className = "screen off";
+  fetch(`https://pokeapi.co/api/v2/pokemon/${rand}/`)
+    .then(response => response.json())
+    .then(data => {
+    var sprite_array = [];
+    var spritesData = {
+      front_default: data.sprites.front_default,
+      front_female: data.sprites.front_female,
+      front_shiny: data.sprites.front_shiny,
+      front_shiny_female: data.sprites.front_shiny_female,
+      back_default: data.sprites.back_default,
+      back_female: data.sprites.back_female,
+      back_shiny: data.sprites.back_shiny,
+      back_shiny_female: data.sprites.back_shiny_female
+    }
+    Object.keys(spritesData).forEach(function(k){
+      let spri = spritesData[k];
+      if (spri !== null) { sprite_array.push(spri) }
+    });
+    global_infos = {
+      name: data.name + '<br/>#' + data.id + '',
+      sprites: sprite_array,
+      sprite_index: 0,
+      sprite_max: sprite_array.length
+    }
+    updateScreen();
+  });
+}
+initApp();

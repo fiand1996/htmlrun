@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <title></title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <meta name="robots" content="noindex, nofollow">
+          <meta name="googlebot" content="noindex, nofollow">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <style type="text/css">
+          @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600;);
+.snip1571 {
+  background-color: #000;
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  margin: 10px;
+  max-width: 315px;
+  min-width: 230px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+.snip1571 *,
+.snip1571 *:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip1571 img {
+  backface-visibility: hidden;
+  max-width: 100%;
+  vertical-align: top;
+}
+.snip1571 figcaption {
+  bottom: 30px;
+  left: 0;
+  position: absolute;
+  z-index: 0;
+}
+.snip1571 figcaption:before {
+  background-color: #ffffff;
+  bottom: -5px;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 100%;
+  top: -5px;
+  z-index: -1;
+}
+.snip1571 h3 {
+  background-color: #c73232;
+  color: #ffffff;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  z-index: 1;
+}
+.snip1571 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.snip1571:hover > img,
+.snip1571.hover > img {
+  opacity: 0.1;
+}
+.snip1571:hover figcaption:before,
+.snip1571.hover figcaption:before {
+  right: -5px;
+}
+          </style>
+     </head>
+     <body>
+          <figure class="snip1571">
+  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample21.jpg" alt="sample21" />
+  <figcaption>
+    <h3>Wisteria Ravenclaw</h3>
+  </figcaption>
+  <a href="#"></a>
+</figure>
+<figure class="snip1571 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample103.jpg" alt="sample103" />
+  <figcaption>
+    <h3>Benjamin Evalent</h3>
+  </figcaption>
+  <a href="#"></a>
+</figure>
+<figure class="snip1571"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample104.jpg" alt="sample104" />
+  <figcaption>
+    <h3>Inverness McKenzie</h3>
+  </figcaption>
+  <a href="#"></a>
+</figure>
+          <script type="text/javascript">
+          /* Demo purposes only */
+$(".hover").mouseleave(
+  function () {
+    $(this).removeClass("hover");
+  }
+);
+          </script>
+     </body>
+</html>

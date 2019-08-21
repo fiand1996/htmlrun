@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <title></title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <meta name="robots" content="noindex, nofollow">
+          <meta name="googlebot" content="noindex, nofollow">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          
+          <style type="text/css">
+          body {
+  overflow: hidden;
+}
+.mobile-menu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  width: 25px;
+  margin: 0 25px 0 0;
+  padding: 5px 0 8px 5px;
+  z-index: 1;
+}
+.mobile-menu hr {
+  border: 0;
+  height: 2px;
+  background: black;
+}
+.mobile-menu ul {
+  position: relative;
+  z-index: -1;
+  display: inline-block;
+  text-align: right;
+  margin-left: 50px;
+  margin-top: -50px;
+  padding: 50px 25px 5px 5px;
+  list-style: none;
+}
+.mobile-menu ul li {
+  padding: 3px;
+}
+          </style>
+     </head>
+     <body>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="mobile-menu">
+
+  <ul>
+    <a href="projects.html">
+      <li class="projects">projects</li>
+    </a>
+    <a href="about.html">
+      <li>about</li>
+    </a>
+    <a href="contact.html">
+      <li>contact</li>
+    </a>
+  </ul>
+</div>
+          <script type="text/javascript">
+          // MOBILE MENU
+$(function() {
+  // create identical menu buttons with different classes	
+  var $active = $("<div class='mm-active'><hr><hr><hr></div>");
+
+  // append 'inactive' menu button to menu div
+  $(".mobile-menu").prepend($active);
+
+  $($active).click(function() {
+
+    if ($active.hasClass('mm-active')) {
+      $(this).nextAll("ul").animate({
+        'margin-left': '-=' + 90
+      }, 100);
+    } else {
+      $(this).nextAll("ul").animate({
+        'margin-left': '+=' + 90
+      }, 100);
+    }
+    $active.toggleClass('mm-active');
+  });
+});
+          </script>
+     </body>
+</html>

@@ -1,0 +1,60 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e2779;
+  margin: 0;
+}
+
+.peas {
+  width: 200px;
+}
+
+.pea-1 .body,
+.pea-1 .cheek {
+  fill:#6BC566;
+}
+
+.pea-2 .body,
+.pea-2 .cheek {
+  fill:#B9EA77;
+}
+
+.pea-3 .body,
+.pea-3 .cheek {
+  fill:#89D770;
+}
+
+.cheek {
+  transition: transform 0.3s;
+}
+
+.pea:hover .cheek {
+  transform: translateY(-1.5px);
+}
+
+.mouth, .pupil {fill:#002B3E;}
+.tongue {fill:#CE4C59;}
+.eye {fill:#FFFFFF;}
+.base-bottom{fill:#007E61;}
+.base-top{fill:#00905F;}
+
+.pea-1 .pupil {transition: transform 0.4s linear;}
+.pea-2 .pupil {transition: transform 0.15s linear;}
+.pea-3 .pupil {transition: transform 0.7s linear;}
+
+.test {
+  width: 4px;
+  height: 4px;
+  background:red;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}

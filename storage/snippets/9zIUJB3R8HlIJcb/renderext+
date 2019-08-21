@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <title></title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <meta name="robots" content="noindex, nofollow">
+          <meta name="googlebot" content="noindex, nofollow">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script type="text/javascript" src="https://kit.fontawesome.com/3eee069757.js"></script>
+          <style type="text/css">
+          @import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+.container{
+  border-radius:60px;
+  width: 280px;
+  height:70px;
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+  margin: auto;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow:0px 4px 10px 4px rgba(43,88,118,.2);
+  overflow:hidden; 
+}
+
+.button{
+  text-align:center;
+  line-height:45px;
+  font-size:30px;
+  color:white;
+  background-color:rgba(255,255,255,.4);
+  border-radius:50%;
+  width:45px;
+  height:45px;
+  position:absolute;
+  left:15px;
+  top:12px;
+  cursor:pointer;
+  transition: all .6s ease;
+  transform: rotate(0deg);
+}
+
+.button-rotate{
+  transform: rotate(45deg);
+}
+
+input{
+  border:0;
+  background-color:rgba(255,255,255,.4);
+  position:absolute;
+  left:70px;
+  top:12px;
+  font-size:16px;
+  padding:13px;
+  color:white;
+  border-radius:60px;
+  transform-origin: -40px 0px;
+  width:170px !important;
+  transition:all .6s ease;
+}
+
+.rotate-input{
+  transform:rotate(-90deg);
+  transition:all .6s ease;
+}
+
+input::placeholder { 
+    color: rgba(255,255,255,.8); 
+} 
+
+.icon-b{
+  color:white;
+  background-color:rgba(255,255,255,.4);
+  border-radius:50%;
+  width:45px;
+  height:45px;
+  line-height:45px;
+  font-size:18px;
+  text-align:center;
+  display:inline-block;
+  margin-left:22px;
+}
+
+.tools{
+  position:absolute;
+  left:52px;
+  top:11px;
+  transform-origin: -30px 20px;
+  transform:rotate(90deg);
+  transition:all .6s ease;
+}
+
+.tools-rotate{
+  transform:rotate(0deg);
+  transition:all .6s ease;
+}
+          </style>
+     </head>
+     <body>
+          <main>
+  <div class="container">
+    <div class="button">+</div>
+    <div class="message">
+      <input type="text" placeholder="Message">
+    </div>
+    <div class="tools">
+      <div class="icon-b"><i class="fas fa-paperclip"></i></div>
+      <div class="icon-b"><i class="fas fa-video"></i></div>
+      <div class="icon-b"><i class="fas fa-images"></i></div>
+    </div>
+  </div>
+</main>
+          <script type="text/javascript">
+          //Inspiration
+// https://dribbble.com/shots/6155986-Chat-Bar-Interaction 
+
+var flag = 0;
+
+$(".button").on('click',function(){
+  if(flag == 0){
+    on();
+    flag = 1;
+  }else{
+    off();
+    flag = 0;
+  }
+});
+
+function on(){
+  $('input').addClass('rotate-input');
+  $('.button').addClass('button-rotate');
+  $('.tools').addClass('tools-rotate');
+}
+
+function off(){
+  $('input').removeClass('rotate-input');
+  $('.button').removeClass('button-rotate');
+  $('.tools').removeClass('tools-rotate');
+}
+          </script>
+     </body>
+</html>

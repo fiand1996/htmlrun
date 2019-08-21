@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-US">
+     <head>
+          <title>Kirimin WA - Send Message in whatapp without saving number</title>
+          <meta content="IE=edge" http-equiv="x-ua-compatible">
+          <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+          <meta content="yes" name="apple-mobile-web-app-capable">
+          <meta content="yes" name="apple-touch-fullscreen">
+          <!-- Fonts -->
+          <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet"/>
+          <link href="icons/icons.css" rel="stylesheet" type="text/css"/>
+          <link href="css/ionicons.css" rel="stylesheet" type="text/css"/>
+          <link href="css/keyframes.css" rel="stylesheet" type="text/css"/>
+          <link href="css/materialize.min.css" rel="stylesheet" type="text/css"/>
+          <link href="css/swiper.css" rel="stylesheet" type="text/css"/>
+          <link href="css/swipebox.min.css" rel="stylesheet" type="text/css"/>
+          <link href="css/style.css" rel="stylesheet" type="text/css"/>
+     </head>
+     <body>
+          <div class="m-scene" id="main"> <!-- Main Container -->
+          <!-- Sidebars -->
+          <!-- Left Sidebar -->
+          <ul id="slide-out-left" class="side-nav collapsible grey lighten-5">
+               <li>
+                    <div class="sidenav-header white">
+                         <div class="nav-avatar">
+                              <img class="avatar" src="img/logo.png" alt="">
+                              <div class="avatar-body">
+                                   <h3 class="primary-text">Kirimin WA</h3>
+                                   <p class="grey-text">Version 1.0.0</p>
+                              </div>
+                         </div>
+                    </div>
+               </li>
+               <li><a href="index.html" class="no-child"><i class="icon-bubble icons"></i> Quick Message</a></li>
+               <li><a href="shortener.html" class="no-child"><i class="icon-link icons"></i> Shortener WhatsApp</a></li>
+               <li><a href="#" class="no-child"><i class="icon-heart icons"></i> Share</a></li>
+               <li><a href="about.html" class="no-child"><i class="icon-question icons"></i> About</a></li>
+          </ul>
+          <!-- End of Sidebars -->
+          <!-- Page Content -->
+          <div id="content">
+               <!-- Toolbar -->
+               <div id="toolbar" class="halo-nav box-shad-none">
+                    <div class="open-left" id="open-left" data-activates="slide-out-left">
+                         <i class="icon-menu icons"></i>
+                    </div>
+               </div>
+               
+               <div class="primary-color lighten-2 h-banner">
+                    <div class="parallax">
+                         <!-- Slider -->
+                         <div class="swiper-container slider">
+                              <div class="swiper-wrapper">
+                                   <div class="swiper-slide">
+                                        <img src="img/slider1.png" alt="">
+                                   </div>
+                                   <div class="swiper-slide">
+                                        <img src="img/slider2.png" alt="">
+                                   </div>
+                                   <div class="swiper-slide">
+                                        <img src="img/slider3.png" alt="">
+                                   </div>
+                              </div>
+                         </div>
+                         <!-- End of Slider -->
+                    </div>
+               </div>
+               <!-- Main Content -->
+               <div class="content">
+                    <form action="" method="post" autocomplete="off">
+                         <div class="form-inputs">
+                         <div class="row">
+                              <div class="input-field col s5">
+                                   <input id="country_code" type="number" value="62">
+                                   <label for="country_code" class="">Country Code</label>
+                              </div>
+                              <div class="input-field col s7">
+                                   <input id="phone" type="number">
+                                   <label for="phone">Phone Number</label>
+                              </div>
+                         </div>
+                         <div class="row">
+                              <div class="input-field col s12">
+                                   <textarea rows="100" cols="50" class="materialize-textarea" id="message"></textarea>
+                                   <label for="message">Your message (optional)</label>
+                              </div>
+                         </div>
+                         
+                         <div class="row">
+                              <div class="col s12">
+                                   <button type="button" class="btn-send waves-effect waves-light btn primary-color width-100">START A CONVERSATION</button>
+                              </div>
+                         </div>
+                    </div>
+                    </form>
+                    </div> <!-- End of Main Contents -->
+                    
+                    
+                    </div> <!-- End of Page Content -->
+                    </div> <!-- End of Page Container -->
+                    
+                    
+                    <script src="js/jquery-2.1.0.min.js"></script>
+                    <script src="js/jquery.swipebox.min.js"></script>
+                    <script src="js/jquery.smoothState.min.js"></script>
+                    <script src="js/materialize.min.js"></script>
+                    <script src="js/swiper.min.js"></script>
+                    <script src="js/jquery.mixitup.min.js"></script>
+                    <script src="js/masonry.min.js"></script>
+                    <script src="js/chart.min.js"></script>
+                    <script src="js/functions.js"></script>
+
+                    <script>
+                         var KiriminWA = {};
+
+                         /**
+                          * @property string Country code accepted by Whatsapp
+                          */
+                         KiriminWA.countryCode = '62';
+
+                         /**
+                          * @param string phoneNumber Destination phone number defined by user
+                          * @return string
+                          */
+                         KiriminWA.formatPhoneNumber = function (phoneNumber) {
+                              if (phoneNumber.length === 0) {
+                                   return '';
+                              }
+                              if (phoneNumber.indexOf('+') >= 0) {
+                                   return phoneNumber.replace(/[^0-9]/g, '');
+                              }
+                              return this.countryCode + phoneNumber.replace(/[^0-9]/g, '').replace(/^620|^62|^0/, '');
+                         };
+
+                         /**
+                          * @param string message Text message defined by user
+                          * @return string
+                          */
+                         KiriminWA.formatMessage = function (message) {
+                              return encodeURIComponent(message);
+                         }
+
+                         /**
+                          * @param string phoneNumber Destination phone number
+                          * @return string URL Scheme protocol accepted by WhatsApp
+                          */
+                         KiriminWA.buildUrl = function (phoneNumber, message) {
+                              phoneNumber = this.formatPhoneNumber(phoneNumber);
+                              if (message === undefined || message.length === 0) {
+                                   return 'whatsapp://send?phone=' + phoneNumber;
+                              }
+                              message = this.formatMessage(message);
+                              return 'whatsapp://send?phone=' + phoneNumber + '&text=' + message;
+                         };
+
+                         /**
+                          * Open WhatsApp application by calling the application specific
+                          * protocol.
+                          *
+                          * @param string phoneNumber
+                          * @param string message
+                          * @return void
+                          */
+                         KiriminWA.openWhatsApp = function (phoneNumber, message) {
+                              window.location.href = this.buildUrl(phoneNumber, message);
+                         }
+
+                         $("body").on("click", ".btn-send", function () {
+                              var code = $("#country_code");
+                              var phone = $("#phone");
+
+                              KiriminWA.openWhatsApp(code.val() + phone.val(), $("#message").val());
+
+                              return false;
+                         });
+
+                         $("body").on("keyup", "#country_code", function () {
+                              if ($(this).val().length > 0 && $("#phone").val().length > 0) {
+                                   $(".btn-send").attr("disabled", false);
+                              } else {
+                                   $(".btn-send").attr("disabled", true);
+                              }
+                         });
+
+                         $("body").on("keyup", "#phone", function () {
+                              if ($(this).val().length > 0 && $("#country_code").val().length > 0) {
+                                   $(".btn-send").attr("disabled", false);
+                              } else {
+                                   $(".btn-send").attr("disabled", true);
+                              }
+                         });
+
+                         $(document).ready(function () {
+                              if ($("#country_code").val().length > 0 && $("#phone").val().length > 0) {
+                                   $(".btn-send").attr("disabled", false);
+                              } else {
+                                   $(".btn-send").attr("disabled", true);
+                              }
+                         });
+                    </script>
+               <script type="text/javascript" src="/socket.io/socket.io.js"></script><script type="text/javascript">//
+// Reload the app if server detects local change
+//
+(function() {
+    var url = 'http://' + document.location.host + '/__api__/autoreload';
+
+    function postStatus() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', url, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && /^[2]/.test(this.status)) {
+            }
+        };
+        xhr.send();
+    }
+
+    function checkForReload() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', url, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && /^[2]/.test(this.status)) {
+                var response = JSON.parse(this.responseText);
+                if (response.content.outdated) {
+                    postStatus();
+                    window.location.reload();
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    setInterval(checkForReload, 1000 * 3);
+})(window);
+</script>
+<script type="text/javascript">(function(window) {
+    var socket = io('http://' + document.location.host);
+
+    // Copy the functions to avoid stack overflow
+    var previousConsole = Object.assign({}, window.console);
+
+    // Overwrite these individually to preserve other log properties
+    window.console.log = function() {
+        if(previousConsole.log) {
+            previousConsole.log.apply(previousConsole, arguments);
+        }
+        socket.emit('console','log', Array.prototype.slice.call(arguments).join(' '));
+    };
+
+    window.console.warn = function() {
+        if(previousConsole.warn) {
+            previousConsole.warn.apply(previousConsole, arguments);
+        }
+        socket.emit('console','warn', Array.prototype.slice.call(arguments).join(' '));
+    };
+
+    window.console.error = function() {
+        if(previousConsole.error) {
+            previousConsole.error.apply(previousConsole, arguments);
+        }
+        socket.emit('console','error', Array.prototype.slice.call(arguments).join(' '));
+    };
+
+    window.console.assert = function(assertion) {
+        if(previousConsole.assert) {
+            previousConsole.assert.apply(previousConsole, arguments);
+        }
+        if(assertion) {
+            socket.emit('console','assert', Array.prototype.slice.call(arguments, 1).join(' '));
+        }
+    };
+})(window);
+</script>
+<script type="text/javascript">//
+// Proxy
+///
+// Intercept XHR calls that would violate single-origin policy.
+// These requests will be proxied through the server.
+//
+(function() {
+    var xhr = {};
+    xhr.open = XMLHttpRequest.prototype.open;
+
+    XMLHttpRequest.prototype.open = function(method, url) {
+        var parser = document.createElement('a');
+        parser.href = url;
+
+        // WP8 does not set hostname on some XHRs
+        if (!parser.hostname) {
+            parser.hostname = window.location.hostname;
+        }
+
+        // proxy the cross-origin request
+        if (!parser.hostname.match(window.location.hostname)) {
+            url = '/proxy/' + encodeURIComponent(url);
+        }
+
+        xhr.open.apply(this, arguments);
+    };
+})(window);
+</script>
+<script type="text/javascript">//
+// Push notification
+//
+(function() {
+    document.addEventListener('deviceready', function() {
+        var oldPushNotification;
+        if (window.PushNotification) {
+            oldPushNotification = window.PushNotification;
+            window.PushNotification.init = function(options) {
+                if (options.android) {
+                    options.android.senderID = "996231231186";
+                    options.android.icon = "pushicon";
+                    options.android.iconColor = "blue";
+                }
+                var pgdevPush = new oldPushNotification.PushNotification(options);
+                pgdevPush.on('registration', function(data) {
+                    console.log('Device Push ID: \n' + data.registrationId);
+                });
+                return pgdevPush;
+            };
+        }
+    });
+})(window);
+</script>
+</body>
+          </html>

@@ -1,0 +1,407 @@
+/**
+ * PHPRunning Embed.css
+ * 
+ * @date 07 June 2019
+ * @version 1.0
+ * @copyright Fiand T <fiand96@yahoo.com>
+ * @author Fiand T (https://github.com/fiand1996)
+ */
+
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #3f424f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2979ff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3362b2;
+}
+
+::-webkit-scrollbar-corner {
+    background: #3f424f;
+}
+
+*, html, body, button, input, textarea, select {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: #39464E;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input, textarea, select {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+select {
+    cursor: pointer;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset, img {
+    border: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+caption, th {
+    text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+abbr, acronym {
+    border: 0;
+}
+
+::-webkit-input-placeholder {
+    color: rgba(57, 70, 78, 0.3);
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: rgba(57, 70, 78, 0.3);
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: rgba(57, 70, 78, 0.3);
+}
+
+:-ms-input-placeholder {
+    color: rgba(57, 70, 78, 0.3);
+}
+
+.icon {
+    stroke: inherit;
+}
+
+button:focus, a:focus, a:active, button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, select::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner {
+    outline: none !important;
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    color: #e7e5e5;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#wrapper {
+    position: relative;
+}
+
+header {
+    height: 50px;
+    box-shadow: 0 0 5px rgba(57, 70, 78, 0.2);
+    position: relative;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+header h1 {
+    float: right;
+    height: 50px;
+    margin: 0 0 0 10px;
+}
+
+header h1 a {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+header h1 a:hover {
+    text-decoration: underline;
+}
+
+header h1 a svg {
+    stroke: #0084ff;
+    vertical-align: middle;
+    padding-left: 10px;
+    position: relative;
+    top: -1px;
+}
+
+#actions li {
+    float: left;
+}
+#actions li.active{
+    border-bottom: 2px solid #2979ff;
+}
+#actions li a {
+    display: block;
+    padding: 0 10px;
+    line-height: 50px;
+    height: 48px;
+}
+
+#actions .hl {
+    height: 3px;
+    width: 0;
+    background: #0084ff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#actions .hl.animated {
+    transition: all 0.15s;
+}
+
+#tabs {
+    margin-top: 50px;
+    overflow: auto;
+    height: calc(100vh - 50px);
+}
+
+#tabs .tCont {
+    padding: 10px;
+    display: none;
+}
+
+#tabs .tCont.active {
+    display: block;
+}
+
+#tabs pre {
+    background: transparent;
+    font-family: "SF Mono", "Monaco", "Andale Mono", "Lucida Console", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    line-height: 1.55em;
+    font-size: 12px;
+}
+
+#tabs #result {
+    padding: 1em;
+    background-color: #fff;
+    padding: 0;
+    height: calc(100vh - 50px);
+}
+
+#tabs #result iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    margin: 0;
+}
+
+#tabs.noHeader {
+    margin-top: 0;
+    overflow: auto;
+    height: 100vh;
+}
+
+#tabs.noHeader #result {
+    padding: 0;
+    height: 100vh;
+}
+
+#resources h3 {
+    font-size: 11px;
+    color: #7f94a1;
+    line-height: 23px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#resources ul {
+    border-top: solid 1px #cfd6d9;
+}
+
+#resources ul li {
+    border-bottom: solid 1px #cfd6d9;
+    padding: 7px 0;
+}
+
+#resources ul a {
+    color: #0084ff;
+}
+
+#actions li a {
+    color: #ffffff;
+}
+
+header {
+    background-color: #1c2128;
+    box-shadow: none;
+}
+
+header h1 a {
+    color: #ffffff;
+}
+
+body {
+    background-color: #20262E;
+}
+
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+code[class*="language-"], pre[class*="language-"] {
+    color: #82aaff;
+    background: none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection, code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection, code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"], pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background: #20262e;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment, .token.prolog, .token.doctype, .token.cdata {
+    color: #546E7A;
+}
+
+.token.punctuation {
+    color: #f3f3f3;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted {
+    color: #F77669;
+}
+
+.token.property {
+    color: #82aaff;
+}
+
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted {
+    color: #C3E88D;
+}
+
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+    color: rgba(233, 237, 237, 1);
+    /* background: hsla(0, 0%, 100%, .5); */
+}
+
+.token.atrule, .token.attr-value, .token.keyword {
+    color: rgba(199, 146, 234, 1);
+}
+
+.token.function, .token.class-name {
+    color: #ffcb6b;
+}
+
+.token.function {
+    color: #82aaff;
+}
+
+.token.regex, .token.important, .token.variable {
+    color: #eeffff;
+}
+.token.important {
+    color: #80CBC4;
+}
+.token.important, .token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}

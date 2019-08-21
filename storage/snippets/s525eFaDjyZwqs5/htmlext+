@@ -1,0 +1,16 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<a target="_blank" style="display: block; position: fixed; bottom: 10px; right: 10px; width: 60px;" href="http://www.yoannbraie.fr/board/"><img style="width: 100%;" src="http://images.yoannbraie.fr/logoyb.png" alt="logo"/></a>
+<main>
+  <div class="gameBoy">
+    <div class="screenBorder">
+      <div class="power"><div class="powerBtn"></div><div class="demiCircle"><div></div></div><div class="demiCircle"><div></div></div><div class="demiCircle"><div></div></div>POWER</div>
+      <div class="screen" id="screengbc"><img id="pokimage" src=""/><label id="pokname"></label></div>
+      <img id="gbcLogo" src="http://images.yoannbraie.fr/gbc.png?rq=33" alt="logo"/>
+    </div>
+    <div class="keyboard">
+      <div class="top"><div><div class="arrows"><label></label><label></label><label></label><label></label></div></div><div><div><label id="bbutton" class="b"></label></div><div><label id="abutton" class="a"></label></div></div></div>
+      <div class="bottom"><button></button><button></button><br/>START SELECT</div>
+    </div>
+    <div class="bottomBoy"></div>
+  </div>
+</main>

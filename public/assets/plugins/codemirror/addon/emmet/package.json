@@ -1,0 +1,75 @@
+{
+  "_from": "@emmetio/codemirror-plugin",
+  "_id": "@emmetio/codemirror-plugin@0.5.4",
+  "_inBundle": false,
+  "_integrity": "sha512-PUqRJn/SfzZr9hkeBW+F5x/sOhMVK5O7pSqGzvTbSyIOgb4KHCHEoJhi/FYjFTQhfQx/Xpj2E2DlhsWpcAiJLQ==",
+  "_location": "/@emmetio/codemirror-plugin",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@emmetio/codemirror-plugin",
+    "name": "@emmetio/codemirror-plugin",
+    "escapedName": "@emmetio%2fcodemirror-plugin",
+    "scope": "@emmetio",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@emmetio/codemirror-plugin/-/codemirror-plugin-0.5.4.tgz",
+  "_shasum": "859220349526a83c6f02a99c0f43e761983f7878",
+  "_spec": "@emmetio/codemirror-plugin",
+  "_where": "C:\\Users\\fiand\\Documents",
+  "author": {
+    "name": "Sergey Chikuyonok",
+    "email": "serge.che@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/emmetio/codemirror-plugin/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@emmetio/config": "^0.4.0",
+    "@emmetio/css-snippets-resolver": "^0.3.1",
+    "@emmetio/expand-abbreviation": "^0.7.1",
+    "@emmetio/extract-abbreviation": "^0.2.0",
+    "@emmetio/field-parser": "^0.3.1",
+    "@emmetio/html-matcher": "^0.3.3",
+    "@emmetio/stream-reader": "^2.2.0",
+    "@emmetio/stream-reader-utils": "^0.1.0"
+  },
+  "deprecated": false,
+  "description": "Plugin for CodeMirror web editor",
+  "devDependencies": {
+    "codemirror": "^5.36.0",
+    "rollup": "^0.57.1",
+    "rollup-plugin-buble": "^0.19.2",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "rollup-watch": "^4.3.1"
+  },
+  "files": [
+    "dist",
+    "example.html"
+  ],
+  "homepage": "https://github.com/emmetio/codemirror-plugin#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "dist/emmet-codemirror-plugin.cjs.js",
+  "module": "dist/emmet-codemirror-plugin.es.js",
+  "name": "@emmetio/codemirror-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmetio/codemirror-plugin.git"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "prepublish": "npm run build",
+    "watch": "rollup -wc"
+  },
+  "version": "0.5.4"
+}

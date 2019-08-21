@@ -1,0 +1,25 @@
+<div class="wrapper">
+	 <div class="wrapper__content">
+			<div class="like">&#10084;</div>
+			<div class="cup-body"></div>
+			<div class="cup-body-shadow"></div>
+			<div class="cup-body-shadow-bottom"></div>
+			<div class="cup-label"></div>
+			<div class="cup-label-red">
+				 <div class="cup-label-red-shadow"></div>
+			</div>
+			<div class="face ">
+				 <div class="face-eyes"></div>
+				 <div class="face-mouth"></div>
+				 <div class="face-blush"></div>
+			</div>
+			<div class="cup-upper">
+				 <div class="cup-upper-shadow"></div>
+			</div>
+			<div class="cup-middle"></div>
+			<div class="cup-bottom">
+				 <div class="cup-bottom-shadow"></div>
+			</div>
+			<div class="floor"></div>
+	 </div>
+</div>
